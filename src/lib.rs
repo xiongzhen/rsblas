@@ -1,3 +1,9 @@
+#[macro_use]
+mod macros;
+
+mod srot;
+pub use srot::srot;
+
 #[cfg(test)]
 mod tests {
     #[test]
