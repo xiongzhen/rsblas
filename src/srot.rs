@@ -46,7 +46,7 @@ use std::arch::x86_64::*;
 ///    - _on exit_: the rotated values are updated in-place.
 /// 
 /// - `incx: usize`<br>Increment between elements of `x` as input and output.
-///   - _on entry_: if `incx == 0`, this function returns immediately.
+///   - _on entry_: if `incx = 0`, this function returns immediately.
 /// 
 /// - `y: &mut [f32]`<br>Array of dimension at least `(n - 1) * incy + 1`.
 ///   - _on entry_: the _n_-elements are `y[i * incy] for i = 0..n`
