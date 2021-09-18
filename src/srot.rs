@@ -64,18 +64,22 @@ use std::arch::x86_64::*;
 /// If `c = 1` and `s = 0`, this function returns immediately.
 /// 
 /// Reference:
-/// 1. [https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/man/drot.html](https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/man/srot.html)
+/// 1. [https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/man/srot.html](https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/man/srot.html)
 pub fn srot(n: usize, x: &mut [f32], incx: usize, y: &mut [f32], incy: usize, c: f32, s: f32) -> bool {
     if n == 0 {
         return true;
     }
 
+    if incx == 0 || incy == 0 {
+        return false;
+    }
     if x.len() < 1 + (n - 1) * incx {
         return false;
     }
     if y.len() < 1 + (n - 1) * incy {
         return false;
     }
+    
     if c == 1.0 && s == 0.0 {
         return true;
     }
