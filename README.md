@@ -5,4 +5,4 @@
 
 ## LEVEL 1
 - Single
-  - SROT :heavy_check_mark:
+  - &#9745; SROT
