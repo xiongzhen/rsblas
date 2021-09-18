@@ -4,6 +4,9 @@ mod macros;
 mod srot;
 pub use srot::srot;
 
+mod drot;
+pub use drot::drot;
+
 #[cfg(test)]
 mod tests {
     #[test]
