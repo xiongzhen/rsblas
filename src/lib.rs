@@ -61,6 +61,10 @@ mod axpy;
 pub use axpy::saxpy;
 pub use axpy::daxpy;
 
+mod copy;
+pub use copy::scopy;
+pub use copy::dcopy;
+
 mod dot;
 pub use dot::sdot;
 pub use dot::ddot;

@@ -8,6 +8,7 @@
 |---|---|---|
 |?asum|s,d|Sum of vector magnitues |
 |?axpy|s,d|adds a scalar multiple of a vector to another vector |
+|?copy|s,d|copies a vector into another vector                  |
 |?dot |s,d|computes a dot product (inner product) of two vectors|
 |?rot |s,d|Plane rotation of points|
 |?scal|s,d|Vector-scalar product   |
