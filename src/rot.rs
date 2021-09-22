@@ -1,4 +1,5 @@
 use std::ops::{Add, Sub, Mul};
+use crate::utils::{check_inc, get_first_index};
 
 trait RotQuickReturn {
     fn quick_return(c: Self, s: Self) -> bool;
@@ -19,30 +20,8 @@ impl RotQuickReturn for f64 {
 fn rot<T>(n: isize, x: &mut [T], incx: isize, y: &mut [T], incy: isize, c: T, s: T) -> bool
 where T: Default + Add<Output = T> + Sub<Output = T> + Mul<Output = T> + Copy + RotQuickReturn,
 {
-    if n <= 0 {
+    if check_inc(n, x, incx) != true || check_inc(n, y, incy) != true {
         return false;
-    }
-
-    if incx > 0 {
-        if x.len() < 1 + ((n as usize) - 1) * (incx as usize) {
-            return false;
-        }
-    }
-    if incx < 0 {
-        if x.len() < 1 + ((n as usize) - 1) * ((-incx) as usize) {
-            return false;
-        }
-    }
-
-    if incy > 0 {
-        if y.len() < 1 + ((n as usize) - 1) * (incy as usize) {
-            return false;
-        }
-    }
-    if incy < 0 {
-        if y.len() < 1 + ((n as usize) - 1) * ((-incy) as usize) {
-            return false;
-        }
     }
 
     if <T as RotQuickReturn>::quick_return(c, s) {
@@ -59,23 +38,11 @@ where T: Default + Add<Output = T> + Sub<Output = T> + Mul<Output = T> + Copy + 
         return true;
     }
 
-    let incx_abs: usize;
-    let mut ix: usize = if incx < 0 {
-        incx_abs = (-incx) as usize;
-        ((-incx) as usize) * (n_usize - 1)
-    } else {
-        incx_abs = incx as usize;
-        0_usize
-    };
+    let incx_abs: usize = if incx > 0 {incx as usize} else {(-incx) as usize};
+    let mut ix: usize = get_first_index(n_usize, incx);
     
-    let incy_abs: usize;
-    let mut iy: usize = if incy < 0 {
-        incy_abs = (-incy) as usize;
-        ((-incy) as usize) * (n_usize - 1)
-    } else {
-        incy_abs = incy as usize;
-        0_usize
-    };
+    let incy_abs: usize = if incy > 0 {incy as usize} else {(-incy) as usize};
+    let mut iy: usize = get_first_index(n_usize, incy);
 
     for _ in 0 .. n_usize {
         let temp = c * x[ix] + s * y[iy];

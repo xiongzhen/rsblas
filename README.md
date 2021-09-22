@@ -9,3 +9,6 @@
 |?asum|s,d|Sum of vector magnitues |
 |?rot |s,d|Plane rotation of points|
 |?scal|s,d|Vector-scalar product   |
+|?axpy|s,d|adds a scalar multiple of a vector to another vector |
+|?dot |s,d|computes a dot product (inner product) of two vectors|
+|?swap|s,d|swaps two vectors       |

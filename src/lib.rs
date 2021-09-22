@@ -2,6 +2,7 @@
 
 use std::ops::{Add, AddAssign, Sub, SubAssign};
 
+mod utils;
 
 
 #[derive(Debug, Copy, Clone)]
@@ -56,6 +57,14 @@ mod asum;
 pub use asum::sasum;
 pub use asum::dasum;
 
+mod axpy;
+pub use axpy::saxpy;
+pub use axpy::daxpy;
+
+mod dot;
+pub use dot::sdot;
+pub use dot::ddot;
+
 mod rot;
 pub use rot::srot;
 pub use rot::drot;
@@ -64,8 +73,9 @@ mod scal;
 pub use scal::sscal;
 pub use scal::dscal;
 
-
-
+mod swap;
+pub use swap::sswap;
+pub use swap::dswap;
 
 
 #[cfg(test)]
