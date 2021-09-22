@@ -4,10 +4,8 @@
 [![Minimum rustc version](https://img.shields.io/badge/rustc-1.52.1+-lightgray.svg)](#rust-version-requirements)
 
 ## LEVEL 1
-- Single
-  - &#9745; SASUM
-  - &#9745; DASUM
-  - &#9745; SROT
-  - &#9745; DROT
-  - &#9745; SSCAL
-  - &#9745; DSCAL
+|Function Group|Data Type|Description|
+|---|---|---|
+|?asum|s,d|Sum of vector magnitues |
+|?rot |s,d|Plane rotation of points|
+|?scal|s,d|Vector-scalar product   |
