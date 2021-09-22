@@ -1,6 +1,10 @@
 #![allow(unused)]
 
-#[derive(Debug)]
+use std::ops::{Add, AddAssign, Sub, SubAssign};
+
+
+
+#[derive(Debug, Copy, Clone)]
 pub struct Complex<T> {
     pub re: T,
     pub im: T,
@@ -13,7 +17,7 @@ impl<T: Default> Default for Complex<T> {
         }
     }
 }
-impl<T: std::ops::Add<Output = T>> std::ops::Add for Complex<T> {
+impl<T: Add<Output = T>> Add for Complex<T> {
     type Output = Self;
     fn add(self, other: Self) -> Self {
         Self {
@@ -22,13 +26,13 @@ impl<T: std::ops::Add<Output = T>> std::ops::Add for Complex<T> {
         }
     }
 }
-impl<T: std::ops::AddAssign> std::ops::AddAssign for Complex<T> {
+impl<T: AddAssign> AddAssign for Complex<T> {
     fn add_assign(&mut self, other: Self) {
         (*self).re += other.re;
         (*self).im += other.im;
     }
 }
-impl<T: std::ops::Sub<Output = T>> std::ops::Sub for Complex<T> {
+impl<T: Sub<Output = T>> Sub for Complex<T> {
     type Output = Self;
     fn sub(self, other: Self) -> Self {
         Self {
@@ -37,7 +41,7 @@ impl<T: std::ops::Sub<Output = T>> std::ops::Sub for Complex<T> {
         }
     }
 }
-impl<T: std::ops::SubAssign> std::ops::SubAssign for Complex<T> {
+impl<T: SubAssign> SubAssign for Complex<T> {
     fn sub_assign(&mut self, other: Self) {
         (*self).re -= other.re;
         (*self).im -= other.im;
@@ -53,10 +57,9 @@ pub use sasum::sasum;
 mod dasum;
 pub use dasum::dasum;
 
-mod srot;
-pub use srot::srot;
-mod drot;
-pub use drot::drot;
+mod rot;
+pub use rot::srot;
+pub use rot::drot;
 
 mod sscal;
 pub use sscal::sscal;
