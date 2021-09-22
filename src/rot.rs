@@ -1,31 +1,23 @@
 use std::ops::{Add, Sub, Mul};
 
-trait RotQuickCheck {
-    fn quick_check(c: Self, s: Self) -> bool;
+trait RotQuickReturn {
+    fn quick_return(c: Self, s: Self) -> bool;
 }
 
-impl RotQuickCheck for f32 {
-    fn quick_check(c: Self, s: Self) -> bool {
-        if c == 1.0f32 && s == 0.0f32 {
-            true
-        } else {
-            false
-        }
+impl RotQuickReturn for f32 {
+    fn quick_return(c: Self, s: Self) -> bool {
+        c == 1.0f32 && s == 0.0f32
     }
 }
 
-impl RotQuickCheck for f64 {
-    fn quick_check(c: Self, s: Self) -> bool {
-        if c == 1.0f64 && s == 0.0f64 {
-            true
-        } else {
-            false
-        }
+impl RotQuickReturn for f64 {
+    fn quick_return(c: Self, s: Self) -> bool {
+        c == 1.0f64 && s == 0.0f64
     }
 }
 
 fn rot<T>(n: isize, x: &mut [T], incx: isize, y: &mut [T], incy: isize, c: T, s: T) -> bool
-where T: Default + Add<Output = T> + Sub<Output = T> + Mul<Output = T> + Copy + RotQuickCheck,
+where T: Default + Add<Output = T> + Sub<Output = T> + Mul<Output = T> + Copy + RotQuickReturn,
 {
     if n <= 0 {
         return false;
@@ -53,7 +45,7 @@ where T: Default + Add<Output = T> + Sub<Output = T> + Mul<Output = T> + Copy + 
         }
     }
 
-    if <T as RotQuickCheck>::quick_check(c, s) {
+    if <T as RotQuickReturn>::quick_return(c, s) {
         return true;
     }
 

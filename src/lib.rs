@@ -52,17 +52,17 @@ impl<T: SubAssign> SubAssign for Complex<T> {
 #[macro_use]
 mod macros;
 
-mod sasum;
-pub use sasum::sasum;
-mod dasum;
-pub use dasum::dasum;
+mod asum;
+pub use asum::sasum;
+pub use asum::dasum;
 
 mod rot;
 pub use rot::srot;
 pub use rot::drot;
 
-mod sscal;
-pub use sscal::sscal;
+mod scal;
+pub use scal::sscal;
+pub use scal::dscal;
 
 
 
