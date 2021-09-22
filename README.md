@@ -5,5 +5,8 @@
 
 ## LEVEL 1
 - Single
+  - &#9745; SASUM
+  - &#9745; DASUM
   - &#9745; SROT
   - &#9745; DROT
+  - 
