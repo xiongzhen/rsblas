@@ -73,6 +73,10 @@ mod rot;
 pub use rot::srot;
 pub use rot::drot;
 
+mod rotg;
+pub use rotg::srotg;
+pub use rotg::drotg;
+
 mod scal;
 pub use scal::sscal;
 pub use scal::dscal;

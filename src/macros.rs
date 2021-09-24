@@ -49,3 +49,4 @@ macro_rules! _mm256_get_pd {
         }
     )
 }
+

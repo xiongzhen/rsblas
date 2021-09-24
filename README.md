@@ -11,5 +11,6 @@
 |?copy|s,d|copies a vector into another vector                  |
 |?dot |s,d|computes a dot product (inner product) of two vectors|
 |?rot |s,d|Plane rotation of points|
+|?rotg|s,d|Construct Givens plane rotation|
 |?scal|s,d|Vector-scalar product   |
 |?swap|s,d|swaps two vectors       |
