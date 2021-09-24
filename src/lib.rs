@@ -1,30 +1,53 @@
 #![allow(unused)]
 
-use std::ops::{Add, AddAssign, Sub, SubAssign};
+use std::ops::{Add, AddAssign, Sub, SubAssign, Neg, Mul, Div};
 
 mod utils;
 
+pub trait Numeric {
+    fn sqrt(self) -> Self;
+    fn sin(self)  -> Self;
+    fn acos(self) -> Self;
+    fn acosh(self) -> Self;
+}
+impl Numeric for f32 {
+    fn sqrt(self) -> Self { self.sqrt() }
+    fn sin(self)  -> Self { self.sin() }
+    fn acos(self) -> Self { self.acos() }
+    fn acosh(self) -> Self { self.acosh() }
+}
+impl Numeric for f64 {
+    fn sqrt(self) -> Self { self.sqrt() }
+    fn sin(self)  -> Self { self.sin() }
+    fn acos(self) -> Self { self.acos() }
+    fn acosh(self) -> Self { self.acosh() }
+}
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Default, Copy, Clone)]
 pub struct Complex<T> {
     pub re: T,
     pub im: T,
 }
-impl<T: Default> Default for Complex<T> {
-    fn default() -> Complex<T> {
+
+//impl<T> Numeric for Complex<T> {
+//
+//}
+
+impl<T: Copy + Mul<Output = T> + Add<Output = T> + Numeric> Complex<T> {
+    pub fn new(re: T, im: T) -> Self {
         Self {
-            re: <T as Default>::default(),
-            im: <T as Default>::default(),
+            re: re,
+            im: im,
         }
+    }
+    pub fn abs(self) -> T {
+        <T as Numeric>::sqrt(self.re * self.re + self.im * self.im)
     }
 }
 impl<T: Add<Output = T>> Add for Complex<T> {
     type Output = Self;
     fn add(self, other: Self) -> Self {
-        Self {
-            re: self.re + other.re,
-            im: self.im + other.im,
-        }
+        Self{ re: self.re + other.re, im: self.im + other.im}
     }
 }
 impl<T: AddAssign> AddAssign for Complex<T> {
@@ -36,10 +59,7 @@ impl<T: AddAssign> AddAssign for Complex<T> {
 impl<T: Sub<Output = T>> Sub for Complex<T> {
     type Output = Self;
     fn sub(self, other: Self) -> Self {
-        Self {
-            re: self.re - other.re,
-            im: self.im - other.im,
-        }
+        Self{ re: self.re - other.re, im: self.im - other.im }
     }
 }
 impl<T: SubAssign> SubAssign for Complex<T> {
@@ -48,7 +68,34 @@ impl<T: SubAssign> SubAssign for Complex<T> {
         (*self).im -= other.im;
     }
 }
+impl<T: Neg<Output = T>> Neg for Complex<T> {
+    type Output = Self;
+    fn neg(self) -> Self {
+        Self { re: -self.re, im: -self.im}
+    }
+}
+impl<T: Copy + Mul<Output = T> + Sub<Output = T> + Add<Output = T>> Mul for Complex<T> {
+    type Output = Self;
+    fn mul(self, other: Self) -> Self {
+        Self{
+            re: self.re * other.re - self.im * other.im,
+            im: self.im * other.re + self.re * other.im,
+        }
+    }
+}
+impl<T: Copy + Div<Output = T> + Add<Output = T> + Mul<Output = T> + Sub<Output = T> + Numeric> Div for Complex<T> {
+    type Output = Self;
+    fn div(self, other: Self) -> Self {
+        let abs_other = Self::abs(other);
+        Self::new(
+            (self.re * other.re + self.im * other.im) / abs_other,
+            (self.im * other.re - self.re * other.im) / abs_other,
+        )
+    }
+}
 
+pub type Complex32 = Complex<f32>;
+pub type Complex64 = Complex<f64>;
 
 #[macro_use]
 mod macros;
